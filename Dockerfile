@@ -6,5 +6,4 @@ RUN yum -y update; yum clean all
 RUN yum -y install yum-utils; yum clean all
 RUN yum -y install screen; yum clean all
 RUN yum -y install wget; yum clean all
-
-EXPOSE 22
+RUM yum -y install unzip zip; yum clean all
