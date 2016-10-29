@@ -27,5 +27,5 @@ RUN /usr/local/bin/3proxy 3proxy.cfg
 
 EXPOSE $KCP_PORT/udp
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-#ENTRYPOINT ["/usr/bin/supervisord", "-n"]
+#ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
