@@ -20,7 +20,6 @@ RUN make -f Makefile.Linux install
 
 WORKDIR /usr/src
 RUN 3proxy 3proxy.cfg
-CMD server_linux_amd64 -t "0.0.0.0:2080" -l ":553" -mode fast2 --key "zhq--!"
 
 EXPOSE $SSH_PORT
 EXPOSE $KCP_PORT/udp
