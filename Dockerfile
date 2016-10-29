@@ -22,6 +22,7 @@ RUN make -f Makefile.Linux install
 WORKDIR /usr/src
 RUN /usr/local/bin/3proxy 3proxy.cfg
 
-CMD server_linux_amd64 -t "0.0.0.0:2080" -l ":553" -mode fast2 --key $KCP_PW
+CMD server_linux_amd64 -t "0.0.0.0:2080" -l ':$KCP_PORT' -mode fast2 --key $KCP_PW
+ENTRYPOINT ["sh","-c","server_linux_amd64", "-t", "0.0.0.0:2080", "-l", ":$KCP_PORT", "-mode", "fast2", "--key" ,"$KCP_PW"]
 
 EXPOSE $KCP_PORT/udp
