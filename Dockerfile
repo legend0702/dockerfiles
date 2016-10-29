@@ -15,8 +15,6 @@ RUN wget https://github.com/z3APA3A/3proxy/archive/3proxy-0.8.7.tar.gz && tar zx
 RUN wget https://github.com/xtaci/kcptun/releases/download/v${KCP_VER}/kcptun-linux-amd64-${KCP_VER}.tar.gz && tar zxf kcptun-linux-amd64-${KCP_VER}.tar.gz -C /usr/local/bin
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/3proxy.cfg
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/kcptun.conf
-RUN echo "command=/usr/local/bin/server_linux_amd64 -t \"0.0.0.0:2080\" -l \":${KCP_PORT}\" -mode fast2 --key \"${KCP_PW}\"" >> /usr/src/kcptun.conf
-RUN ln -sf /usr/src/kcptun.conf /etc/supervisord.d/kcptun.conf
 
 WORKDIR /usr/src/3proxy-3proxy-0.8.7
 RUN make -f Makefile.Linux
@@ -24,10 +22,12 @@ RUN make -f Makefile.Linux install
 
 WORKDIR /usr/src
 RUN /usr/local/bin/3proxy /usr/src/3proxy.cfg
+RUN echo "command=/usr/local/bin/server_linux_amd64 -t \"0.0.0.0:2080\" -l \":${KCP_PORT}\" -mode fast2 --key \"${KCP_PW}\"" >> /usr/src/kcptun.conf
+RUN ln -sf /usr/src/kcptun.conf /etc/supervisord.d/kcptun.conf
 
 EXPOSE $KCP_PORT/udp
 
 #ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 #CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
 
-CMD ["/usr/bin/supervisord"]
+#CMD ["/usr/bin/supervisord"]
