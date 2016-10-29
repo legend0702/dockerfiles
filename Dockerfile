@@ -5,6 +5,7 @@ MAINTAINER qwepoidjdj@hotmail.com
 ENV SSH_PORT 22
 ENV KCP_PORT 553
 ENV KCP_VER 20160919
+ENV KCP_PW zhq--!
 
 RUN yum -y install gcc;yum clean all
 RUN yum -y install make;yum clean all
@@ -19,7 +20,8 @@ RUN make -f Makefile.Linux
 RUN make -f Makefile.Linux install
 
 WORKDIR /usr/src
-RUN 3proxy 3proxy.cfg
+RUN /usr/local/bin/3proxy 3proxy.cfg
 
-EXPOSE $SSH_PORT
+CMD server_linux_amd64 -t "0.0.0.0:2080" -l ":553" -mode fast2 --key $KCP_PW
+
 EXPOSE $KCP_PORT/udp
