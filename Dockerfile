@@ -16,7 +16,7 @@ RUN wget https://github.com/xtaci/kcptun/releases/download/v${KCP_VER}/kcptun-li
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/3proxy.cfg
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/kcptun.conf
 RUN echo "command=/usr/local/bin/server_linux_amd64 -t \"0.0.0.0:2080\" -l \":${KCP_PORT}\" -mode fast2 --key \"${KCP_PW}\"" >> /usr/src/kcptun.conf
-RUN ls -sf /usr/src/kcptun.conf /etc/supervisor.d/kcptun.conf
+RUN ln -sf /usr/src/kcptun.conf /etc/supervisor.d/kcptun.conf
 
 WORKDIR /usr/src/3proxy-3proxy-0.8.7
 RUN make -f Makefile.Linux
@@ -27,4 +27,5 @@ RUN /usr/local/bin/3proxy 3proxy.cfg
 
 EXPOSE $KCP_PORT/udp
 
-ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
+#ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["supervisord", "reload"]
