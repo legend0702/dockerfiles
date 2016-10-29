@@ -22,10 +22,12 @@ WORKDIR /usr/src/3proxy-3proxy-0.8.7
 RUN make -f Makefile.Linux
 RUN make -f Makefile.Linux install
 
-#WORKDIR /usr/src
-#RUN /usr/local/bin/3proxy /usr/src/3proxy.cfg
+WORKDIR /usr/src
+RUN /usr/local/bin/3proxy /usr/src/3proxy.cfg
 
 EXPOSE $KCP_PORT/udp
 
 #ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 #CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
+
+CMD ["/usr/bin/supervisord"]
