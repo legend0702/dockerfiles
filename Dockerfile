@@ -4,7 +4,7 @@ MAINTAINER qwepoidjdj@hotmail.com
 
 ENV SSH_PORT 22
 ENV KCP_PORT 553
-ENV KCP_VER 20161031
+ENV KCP_VER 20160919
 ENV KCP_PW zhq--!
 
 RUN yum -y install gcc;yum clean all
