@@ -17,13 +17,12 @@ RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/3pr
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/3proxy.conf
 RUN wget https://github.com/legend0702/dockerfiles/releases/download/KCP-TUN/kcptun.conf
 
-WORKDIR /usr/src/3proxy-3proxy-0.8.7
-RUN make -f Makefile.Linux
-RUN make -f Makefile.Linux install
+RUN make -c /usr/src/3proxy-3proxy-0.8.7 -f Makefile.Linux
+RUN make -c /usr/src/3proxy-3proxy-0.8.7 -f Makefile.Linux install
 
 WORKDIR /usr/src
 RUN echo "command=/usr/local/bin/3proxy /usr/src/3proxy.cfg" >> /usr/src/3proxy.conf
-RUN ln -sf /usr/src/3proxy.conf /etc/supervisord.d/3proxy.conf
+RUN ln -sf /usr/src/3proxy.conf /etc/supervisord.d/3proxy.conf	
 
 RUN echo "command=/usr/local/bin/server_linux_amd64 -t \"0.0.0.0:2080\" -l \":${KCP_PORT}\" -mode fast2 --key \"${KCP_PW}\"" >> /usr/src/kcptun.conf
 RUN ln -sf /usr/src/kcptun.conf /etc/supervisord.d/kcptun.conf
