@@ -7,8 +7,8 @@ ENV KCP_PORT 553
 ENV KCP_VER 20161102
 ENV KCP_PW zhq--!
 
-RUN yum -y install gcc;yum clean all
-RUN yum -y install make;yum clean all
+RUN yum -y install gcc;
+RUN yum -y install make;
 
 WORKDIR /usr/src
 RUN wget https://github.com/z3APA3A/3proxy/archive/3proxy-0.8.7.tar.gz && tar zxf 3proxy-0.8.7.tar.gz
